@@ -1,0 +1,38 @@
+--- drw.h
++++ drw.h
+@@ -38,7 +38,6 @@ typedef struct {
+ 	unsigned int h;
+ } Extnts;
+ 
+-
+ /* Drawable abstraction */
+ Drw *drw_create(Display *dpy, int screen, Window win, unsigned int w, unsigned int h);
+ void drw_resize(Drw *drw, unsigned int w, unsigned int h);
+@@ -68,8 +67,3 @@ void drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, const char
+ 
+ /* Map functions */
+ void drw_map(Drw *drw, Window win, int x, int y, unsigned int w, unsigned int h);
+-
+-/* X Basic call */
+-void x_set_color(Drw *drw, Clr *color);
+-void x_drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h);
+-void x_drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, const char *text);--- dwm.c
++++ dwm.c
+@@ -715,8 +620,15 @@ drawbar(Monitor *m) {
+ 	drw_text(drw, x, 0, w, bh, m->ltsymbol, 0);
+ 	x += w;
+ 	xx = x;
+-	if(m == selmon) /* status is only drawn on selected monitor */
+-		x = drawstatusbar(m, bh, stext, xx);
++	if(m == selmon) { /* status is only drawn on selected monitor */
++		w = TEXTW(stext);
++		x = m->ww - w;
++		if(x < xx) {
++			x = xx;
++			w = m->ww - xx;
++		}
++		drw_text(drw, x, 0, w, bh, stext, 0);
++	}
+ 	else
+ 		x = m->ww;
+ 	if((w = x - xx) > bh) {
