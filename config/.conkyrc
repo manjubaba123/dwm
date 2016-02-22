@@ -1,0 +1,9 @@
+out_to_console yes
+out_to_x no
+background no
+update_interval 1
+total_run_times 0
+use_spacer none
+
+TEXT
+${cpu cpu1}% : ${cpu cpu2}% | ${loadavg 2 3} | $memperc% ($mem) ↓ ${downspeed eth0} ↑ ${upspeed eth0} 🕓 ${time %a %d.%m.%Y %H:%M:%S} 
