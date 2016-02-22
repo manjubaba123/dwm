@@ -24,3 +24,7 @@ ToDo
 - different Tag names (like "main", "term", "misc" and so on)
 - Statusbar (icons for every value, colored icons)
 - Rules (in config.h)
+
+Screenshot
+----------
+![dwm screenshot](screenshot.png?raw=true)
