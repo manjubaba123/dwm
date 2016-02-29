@@ -7,6 +7,7 @@ Requirements
 - make
 - gcc
 - terminus font
+- (xclip for urxvt copy/paste)
 
 Installation Instructions
 -------------------------
