@@ -4,6 +4,8 @@ bananimu's dwm version
 Requirements
 ------------
 - xlib headers
+- make
+- gcc
 - terminus font
 
 Installation Instructions
@@ -13,7 +15,6 @@ Installation Instructions
 
 Patches
 -------
-- better borders
 - gaplessgrid
 - horizgrid
 - push
@@ -21,9 +22,8 @@ Patches
 
 ToDo
 ----
-- different Tag names (like "main", "term", "misc" and so on)
 - Statusbar (icons for every value, colored icons)
-- Rules (in config.h)
+- maybe more Rules (in config.h)
 
 Screenshot
 ----------
