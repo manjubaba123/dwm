@@ -6,9 +6,9 @@
 
 /* appearance */
 static const char *fonts[] = {
-	"-*-terminus-medium-*-*-*-16-*-*-*-*-*-*-*"
+	"-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*"
 };
-static const char dmenufont[]       = "-*-terminus-medium-*-*-*-16-*-*-*-*-*-*-*";
+static const char dmenufont[]       = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
 static const char normbordercolor[] = "#006680";
 static const char normbgcolor[]     = "#142D36";
 static const char normfgcolor[]     = "#b9c9ce";
@@ -22,7 +22,7 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const unsigned int gappx     = 0; /* gap pixel between windows */ 
 
 /* tagging */
-static const char *tags[] = { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+static const char *tags[] = { "web", "term", "groupware", "files", "editor", "six", "seven", "eight", "nine" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -30,7 +30,10 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Firefox",  NULL,       NULL,       1,            0,           -1 },
+	{ "Thunderbird", NULL,    NULL,       1 << 2,       0,           -1 },
+	{ "Thunar",   NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "Gedit",    NULL,       NULL,       1 << 4,       0,           -1 },
 };
 
 /* layout(s) */
@@ -40,16 +43,16 @@ static const int resizehints = 0;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ "[T]",      tile },    /* first entry is default */
+	{ "[F]",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
-	{ "##g",      gaplessgrid },
-	{ "##h",      horizgrid },
-	{ "|||",      col },
+	{ "[G]",      gaplessgrid },
+	{ "[H]",      horizgrid },
+	{ "[C]",      col },
 };
 
 /* key definitions */
-#define MODKEY Mod4Mask
+#define MODKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -65,6 +68,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "urxvtc", NULL };
 static const char *filemgr[]  = { "thunar", NULL };
 static const char *lockcmd[]  = { "slock", NULL };
+static const char *webcmd[]   = { "firefox", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -72,6 +76,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_n,      spawn,          {.v = filemgr } },
 	{ MODKEY,                       XK_o,      spawn,          {.v = lockcmd } },
+	{ MODKEY,                       XK_w,      spawn,          {.v = webcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
