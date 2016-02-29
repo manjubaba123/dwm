@@ -25,6 +25,7 @@ ToDo
 - Statusbar (icons for every value, colored icons)
 - maybe more Rules (in config.h)
 
-Screenshot
+Screenshots
 ----------
-![dwm screenshot](screenshot.png?raw=true)
+![dwm screenshot](screen1.png?raw=true)
+![dwm screenshot](screen2.png?raw=true)
