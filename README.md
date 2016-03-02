@@ -8,6 +8,7 @@ Requirements
 - gcc
 - terminus font
 - (xclip for urxvt copy/paste)
+- (slock for screenlocking)
 
 Installation Instructions
 -------------------------
