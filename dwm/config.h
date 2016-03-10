@@ -22,7 +22,7 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const unsigned int gappx     = 0; /* gap pixel between windows */ 
 
 /* tagging */
-static const char *tags[] = { "web", "term", "groupware", "files", "editor", "remote", "seven", "eight", "nine" };
+static const char *tags[] = { "web", "term", "groupware", "files", "editor", "remote", "vm", "eight", "nine" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -30,11 +30,14 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Firefox",  NULL,       NULL,       1,            0,           -1 },
+	{ "chromium",  NULL,      NULL,       1,            0,           -1 },
 	{ "Thunderbird", NULL,    NULL,       1 << 2,       0,           -1 },
+	{ "Thunderbird", NULL,   "Thunderbird Preferences",1 << 2,      1,           -1 },
 	{ "Thunar",   NULL,       NULL,       1 << 3,       0,           -1 },
 	{ "Gedit",    NULL,       NULL,       1 << 4,       0,           -1 },
+	{ "Atom",     NULL,       NULL,       1 << 4,       0,           -1 },
 	{ "Remmina",  NULL,       NULL,       1 << 5,       0,           -1 },
+	{ "VirtualBox",  NULL,    NULL,       1 << 6,       0,           -1 },
 };
 
 /* layout(s) */
@@ -69,7 +72,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "urxvtc", NULL };
 static const char *filemgr[]  = { "thunar", NULL };
 static const char *lockcmd[]  = { "slock", NULL };
-static const char *webcmd[]   = { "firefox", NULL };
+static const char *webcmd[]   = { "chromium", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
