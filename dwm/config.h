@@ -6,9 +6,9 @@
 
 /* appearance */
 static const char *fonts[] = {
-	"-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*"
+	"-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*"
 };
-static const char dmenufont[]       = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
+static const char dmenufont[]       = "-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*";
 static const char normbordercolor[] = "#006680";
 static const char normbgcolor[]     = "#142D36";
 static const char normfgcolor[]     = "#b9c9ce";
@@ -17,6 +17,10 @@ static const char selbgcolor[]      = "#142D36";
 static const char selfgcolor[]      = "#66e0ff";
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
+static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systrayspacing = 2;   /* systray spacing */
+static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, 0: display systray on the last monitor*/
+static const int showsystray        = 1;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const unsigned int gappx     = 0; /* gap pixel between windows */ 
@@ -31,13 +35,15 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "chromium",  NULL,      NULL,       1,            0,           -1 },
+	{ "Claws-mail", NULL,     NULL,       1 << 2,       0,           -1 },
 	{ "Thunderbird", NULL,    NULL,       1 << 2,       0,           -1 },
 	{ "Thunderbird", NULL,   "Thunderbird Preferences",1 << 2,      1,           -1 },
 	{ "Thunar",   NULL,       NULL,       1 << 3,       0,           -1 },
 	{ "Gedit",    NULL,       NULL,       1 << 4,       0,           -1 },
-	{ "Atom",     NULL,       NULL,       1 << 4,       0,           -1 },
+	{ "Subl3",     NULL,       NULL,       1 << 4,       0,           -1 },
 	{ "Remmina",  NULL,       NULL,       1 << 5,       0,           -1 },
 	{ "VirtualBox",  NULL,    NULL,       1 << 6,       0,           -1 },
+	{ "Vmplayer",  NULL,      NULL,       1 << 6,       0,           -1 },
 };
 
 /* layout(s) */

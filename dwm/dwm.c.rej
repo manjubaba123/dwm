@@ -1,38 +1,36 @@
---- drw.h
-+++ drw.h
-@@ -38,7 +38,6 @@ typedef struct {
- 	unsigned int h;
- } Extnts;
- 
--
- /* Drawable abstraction */
- Drw *drw_create(Display *dpy, int screen, Window win, unsigned int w, unsigned int h);
- void drw_resize(Drw *drw, unsigned int w, unsigned int h);
-@@ -68,8 +67,3 @@ void drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, const char
- 
- /* Map functions */
- void drw_map(Drw *drw, Window win, int x, int y, unsigned int w, unsigned int h);
--
--/* X Basic call */
--void x_set_color(Drw *drw, Clr *color);
--void x_drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h);
--void x_drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, const char *text);--- dwm.c
+--- dwm.c
 +++ dwm.c
-@@ -715,8 +620,15 @@ drawbar(Monitor *m) {
- 	drw_text(drw, x, 0, w, bh, m->ltsymbol, 0);
- 	x += w;
- 	xx = x;
--	if(m == selmon) /* status is only drawn on selected monitor */
--		x = drawstatusbar(m, bh, stext, xx);
-+	if(m == selmon) { /* status is only drawn on selected monitor */
-+		w = TEXTW(stext);
-+		x = m->ww - w;
-+		if(x < xx) {
-+			x = xx;
-+			w = m->ww - xx;
-+		}
-+		drw_text(drw, x, 0, w, bh, stext, 0);
-+	}
- 	else
- 		x = m->ww;
- 	if((w = x - xx) > bh) {
+@@ -223,24 +193,18 @@ static void updateclientlist(void);
+ static void updatenumlockmask(void);
+ static void updatesizehints(Client *c);
+ static void updatestatus(void);
+-static void updatesystray(void);
+-static void updatesystrayicongeom(Client *i, int w, int h);
+-static void updatesystrayiconstate(Client *i, XPropertyEvent *ev);
+ static void updatewindowtype(Client *c);
+ static void updatetitle(Client *c);
+ static void updatewmhints(Client *c);
+ static void view(const Arg *arg);
+ static Client *wintoclient(Window w);
+ static Monitor *wintomon(Window w);
+-static Client *wintosystrayicon(Window w);
+ static int xerror(Display *dpy, XErrorEvent *ee);
+ static int xerrordummy(Display *dpy, XErrorEvent *ee);
+ static int xerrorstart(Display *dpy, XErrorEvent *ee);
+ static void zoom(const Arg *arg);
+ 
+ /* variables */
+-static Systray *systray = NULL;
+-static unsigned long systrayorientation = _NET_SYSTEM_TRAY_ORIENTATION_HORZ;
+ static const char broken[] = "broken";
+ static char stext[256];
+ static int screen;
+@@ -587,7 +504,7 @@ configurenotify(XEvent *e)
+ 				for (c = m->clients; c; c = c->next)
+ 					if (c->isfullscreen)
+ 						resizeclient(c, m->mx, m->my, m->mw, m->mh);
+-				resizebarwin(m);
++				XMoveResizeWindow(dpy, m->barwin, m->wx, m->by, m->ww, bh);
+ 			}
+ 			focus(NULL);
+ 			arrange(NULL);
